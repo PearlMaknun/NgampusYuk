@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/jadwal_saya"
+            android:icon="@drawable/ic_view_list_black_24dp"
+            android:title="Jadwal Saya" />
+        <item
+            android:id="@+id/rate_us"
+            android:icon="@drawable/ic_stars_black_24dp"
+            android:title="Beri peringkat" />
+        <item
+            android:id="@+id/bagikan"
+            android:icon="@drawable/ic_share_black_24dp"
+            android:title="Bagikan" />
+
+    </group>
+
+    <item android:title="Tentang">
+        <menu>
+
+            <item
+                android:id="@+id/about"
+                android:icon="@drawable/ic_info_outline_black_24dp"
+                android:title="Tentang" />
+        </menu>
+    </item>
+
+</menu>
