@@ -33,12 +33,27 @@ public class AdapterJadwalKuliah extends RecyclerView.Adapter<AdapterJadwalKulia
 
     @Override
     public void onBindViewHolder(MatakuliahViewHolder holder, int position) {
-        JadwalKuliah current = mDB.query(position);
+
+        final JadwalKuliah current = mDB.query(position);
         holder.hari.setText(current.getHari());
         holder.jam.setText(current.getJamMulai());
         holder.matakuliah.setText(current.getJudulMatkul());
         holder.ruang.setText((current.getRuangan()));
-        id = current.getmId();
+
+        holder.layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getDetail(current.getmId());
+            }
+        });
+
+
+    }
+
+    public void getDetail(int id){
+        Intent goToDetail = new Intent(mContext, DetailJadwal.class);
+        goToDetail.putExtra("ID", id);
+        mContext.startActivity(goToDetail);
     }
 
     @Override
@@ -54,19 +69,16 @@ public class AdapterJadwalKuliah extends RecyclerView.Adapter<AdapterJadwalKulia
 
         final AdapterJadwalKuliah mAdapter;
 
-        public MatakuliahViewHolder(View itemView, AdapterJadwalKuliah adapter) {
+        public View layout;
+
+        public MatakuliahViewHolder(final View itemView, AdapterJadwalKuliah adapter) {
             super(itemView);
+            layout = itemView;
             hari = itemView.findViewById(R.id.harikuliah);
             jam = itemView.findViewById(R.id.jamkuliah);
             matakuliah = itemView.findViewById(R.id.matakuliah);
             ruang = itemView.findViewById(R.id.ruangan);
             this.mAdapter = adapter;
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-
-                }
-            });
         }
 
         @Override

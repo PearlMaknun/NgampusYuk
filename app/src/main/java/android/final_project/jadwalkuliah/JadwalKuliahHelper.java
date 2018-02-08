@@ -78,6 +78,34 @@ public class JadwalKuliahHelper extends SQLiteOpenHelper {
         }
     }
 
+    public JadwalKuliah getOne(int position) {
+        String query = "SELECT * FROM " + TABLE_NAME +
+                " WHERE " + KEY_ID + " = " + position;
+
+        Cursor cursor = null;
+        JadwalKuliah entry = new JadwalKuliah();
+
+        try {
+            if (mReadableDB == null) {mReadableDB = getReadableDatabase();}
+            cursor = mReadableDB.rawQuery(query, null);
+            cursor.moveToFirst();
+            entry.setmId(cursor.getInt(cursor.getColumnIndex(KEY_ID)));
+            entry.setJudulMatkul(cursor.getString(cursor.getColumnIndex(COLUMNS_ONE)));
+            entry.setHari(cursor.getString(cursor.getColumnIndex(COLUMNS_TWO)));
+            entry.setJamMulai(cursor.getString(cursor.getColumnIndex(COLUMNS_THREE)));
+            entry.setRuangan(cursor.getString(cursor.getColumnIndex(COLUMNS_FOUR)));
+            entry.setNamaDosen(cursor.getString(cursor.getColumnIndex(COLUMNS_FIVE)));
+            entry.setNoHpDosen(cursor.getString(cursor.getColumnIndex(COLUMNS_SIX)));
+            entry.setCatatan(cursor.getString(cursor.getColumnIndex(COLUMNS_SEVEN)));
+        } catch (Exception e) {
+            Log.d(TAG, "QUERY EXCEPTION! " + e.getMessage());
+        } finally {
+            // Must close cursor and db now that we are done with it.
+            cursor.close();
+            return entry;
+        }
+    }
+
     public long count() {
         if (mReadableDB == null) {mReadableDB = getReadableDatabase();}
         return DatabaseUtils.queryNumEntries(mReadableDB, TABLE_NAME);
@@ -96,9 +124,18 @@ public class JadwalKuliahHelper extends SQLiteOpenHelper {
         db.insert(TABLE_NAME, null, values);
     }
 
-    public Cursor getAll(){
+    public void updateData(int id, String Judul, String Hari, String Jam, String Ruangan, String Dosen, String NoDosen, String Catatan) {
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor data = db.rawQuery("SELECT * FROM jadwalkuliah", null);
-        return data;
+        ContentValues values = new ContentValues();
+        values.put(KEY_ID, id);
+        values.put(COLUMNS_ONE, Judul);
+        values.put(COLUMNS_TWO, Hari);
+        values.put(COLUMNS_THREE, Jam);
+        values.put(COLUMNS_FOUR, Ruangan);
+        values.put(COLUMNS_FIVE, Dosen);
+        values.put(COLUMNS_SIX, NoDosen);
+        values.put(COLUMNS_SEVEN, Catatan);
+        String _id = String.valueOf(id);
+        db.update(TABLE_NAME, values, "ID=?", new String[] {_id});
     }
 }

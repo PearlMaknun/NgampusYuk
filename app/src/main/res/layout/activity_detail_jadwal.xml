@@ -47,14 +47,13 @@
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:textSize="20dp"
-                    android:text="Jam  " />
+                    android:text="Hari" />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/jam"
+                    android:id="@+id/hari"
                     android:textSize="20dp"
-                    android:text=":"/>
-
+                    android:text=":" />
 
             </LinearLayout>
 
@@ -67,13 +66,14 @@
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:textSize="20dp"
-                    android:text="Hari" />
+                    android:text="Jam  " />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/hari"
+                    android:id="@+id/jam"
                     android:textSize="20dp"
-                    android:text=":" />
+                    android:text=":"/>
+
 
             </LinearLayout>
 

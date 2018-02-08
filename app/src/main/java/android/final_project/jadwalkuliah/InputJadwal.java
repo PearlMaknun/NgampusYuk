@@ -27,7 +27,6 @@ public class InputJadwal extends AppCompatActivity {
             "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"
     };
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

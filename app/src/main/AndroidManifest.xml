@@ -26,6 +26,9 @@
             android:name=".ListMatakuliah"
             android:label="Jadwal Saya" />
         <activity
+            android:name=".DetailJadwal"
+            android:label="Detail Jadwal" />
+        <activity
             android:name=".Tentang"
             android:label="Tentang" />
         <activity

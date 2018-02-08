@@ -62,7 +62,7 @@ public class JadwalKuliah {
         return NamaDosen;
     }
 
-    public void setNamaDosen(int mId) {
+    public void setNamaDosen(String NamaDosen) {
         this.NamaDosen = NamaDosen;
     }
 
