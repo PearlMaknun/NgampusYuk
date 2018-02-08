@@ -92,7 +92,6 @@ public class EditJadwal extends AppCompatActivity {
                 }
                 else
                     Toast.makeText(EditJadwal.this, "Pastikan kolom sudah terisi!", Toast.LENGTH_LONG).show();
-
             }
         });
 
