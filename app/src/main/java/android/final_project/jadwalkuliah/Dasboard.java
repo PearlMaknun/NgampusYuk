@@ -89,6 +89,9 @@ public class Dasboard extends AppCompatActivity
         } else if (id == R.id.about) {
             Intent i = new Intent(Dasboard.this, Tentang.class);
             startActivity(i);
+        } else if (id == R.id.developer) {
+            Intent i = new Intent(Dasboard.this, Kontak.class);
+            startActivity(i);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

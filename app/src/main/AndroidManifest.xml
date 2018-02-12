@@ -35,8 +35,9 @@
             android:name=".Dasboard"
             android:label="@string/title_activity_dasboard"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Kontak"
-            android:label="Kontak"></activity>
+        <activity
+            android:name=".Kontak"
+            android:label="Develover" />
     </application>
 
 </manifest>

@@ -19,10 +19,11 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:orientation="vertical">
+
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:src="@drawable/ic_android_black_24dp"
+            android:src="@drawable/ngampusyuk"
             android:paddingBottom="16dp"
             />
 
