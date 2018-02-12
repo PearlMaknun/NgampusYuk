@@ -14,6 +14,9 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 import android.widget.Toast;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import static android.content.ContentValues.TAG;
 
 /**
@@ -50,6 +53,36 @@ public class JadwalKuliahHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
+    }
+
+    public List<JadwalKuliah> jadwalList(String filter) {
+        String query;
+        if(filter.equals("")){
+            //regular query
+            query = "SELECT  * FROM " + TABLE_NAME;
+        }else{
+            //filter results by filter option provided
+            query = "SELECT  * FROM " + TABLE_NAME + " ORDER BY "+ filter;
+        }
+
+        List<JadwalKuliah> jadwalLinkedList = new LinkedList<>();
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+        JadwalKuliah entry;
+
+        if (cursor.moveToFirst()) {
+            do {
+                entry = new JadwalKuliah();
+
+                entry.setmId(cursor.getInt(cursor.getColumnIndex(KEY_ID)));
+                entry.setHari(cursor.getString(cursor.getColumnIndex(COLUMNS_TWO)));
+                entry.setJamMulai(cursor.getString(cursor.getColumnIndex(COLUMNS_THREE)));
+                entry.setJudulMatkul(cursor.getString(cursor.getColumnIndex(COLUMNS_ONE)));
+                entry.setRuangan(cursor.getString(cursor.getColumnIndex(COLUMNS_FOUR)));
+                jadwalLinkedList.add(entry);
+            } while (cursor.moveToNext());
+        }
+        return jadwalLinkedList;
     }
 
     public JadwalKuliah query(int position) {
@@ -137,5 +170,12 @@ public class JadwalKuliahHelper extends SQLiteOpenHelper {
         values.put(COLUMNS_SEVEN, Catatan);
         String _id = String.valueOf(id);
         db.update(TABLE_NAME, values, "ID=?", new String[] {_id});
+    }
+
+    public void deleteData(int id)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String strFilter = "ID=" + id;
+        db.delete(TABLE_NAME, strFilter, null);
     }
 }

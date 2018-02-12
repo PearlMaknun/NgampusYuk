@@ -13,12 +13,9 @@ import java.util.LinkedList;
 
 public class ListMatakuliah extends AppCompatActivity {
 
-    private final LinkedList<String> Jam = new LinkedList<>();
-    private final LinkedList<String> Hari = new LinkedList<>();
-    private final LinkedList<String> Matakuliah = new LinkedList<>();
-    private final LinkedList<String> Ruangan = new LinkedList<>();
-
-    private JadwalKuliahHelper mDB;
+    private RecyclerView.LayoutManager mLayoutManager;
+    private String filter = "";
+    private JadwalKuliahHelper myDB;
     private RecyclerView mRecyclerView;
     private AdapterJadwalKuliah mAdapter;
 
@@ -28,24 +25,20 @@ public class ListMatakuliah extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_matakuliah);
 
-        mDB = new JadwalKuliahHelper(this);
-
-        /*for (int i = 0; i < 3; i++) {
-            mWordList1.addLast(timkita[i]);
-            mWordList2.addLast(timlawan[i]);
-        }*/
-
-        //	Get	a	handle	to	the	RecyclerView.
         mRecyclerView = findViewById(R.id.list_matakuliah);
+        mLayoutManager = new LinearLayoutManager(this);
 
-        //	Create	an	adapter	and	supply	the	data	to	be	displayed.
-        mAdapter = new AdapterJadwalKuliah(this, mDB);
-
-        //	Connect	the	adapter	with	the	RecyclerView.
+        mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
 
-        //	Give	the	RecyclerView	a	default	layout	manager.
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        populaterecyclerView(filter);
+
+    }
+
+    private void populaterecyclerView(String filter){
+        myDB = new JadwalKuliahHelper(this);
+        mAdapter = new AdapterJadwalKuliah(myDB.jadwalList(filter), this, mRecyclerView);
+        mRecyclerView.setAdapter(mAdapter);
 
     }
 }
